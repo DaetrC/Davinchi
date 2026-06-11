@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Culture Court — DaVinchi x TTC</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,600;1,800&family=Barlow:wght@300;400;500&display=swap');
+
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --black:   #080808;
+  --charcoal:#111114;
+  --surface: #181820;
+  --off:     #F2F0EB;
+  --off2:    #C8C4BC;
+  --chrome:  #B0B4B8;
+  --chrome2: #7A7E82;
+  --neon:    #CAFF00;     /* tennis ball yellow */
+  --neon2:   #9DC900;
+  --white:   #FFFFFF;
+  --rule:    rgba(255,255,255,.07);
+  --rule2:   rgba(255,255,255,.12);
+  --glow:    rgba(202,255,0,.15);
+  --page-w:  1200px;
+}
+
+/* ── RESET ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--black); }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--off);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TICKER ──────────────────────────────────────────── */
+.ticker-rail {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 32px;
+  background: var(--neon);
+  z-index: 999;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.ticker-flag {
+  background: var(--black);
+  color: var(--neon);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  padding: 0 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  border-right: 2px solid var(--neon);
+}
+.ticker-scroll-wrap { flex: 1; overflow: hidden; height: 100%; }
+.ticker-scroll {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  height: 100%;
+  animation: ticker 44s linear infinite;
+}
+.ticker-item {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--black);
+  padding: 0 20px;
+}
+.ticker-dot {
+  color: var(--black);
+  opacity: .4;
+  font-size: 8px;
+  vertical-align: middle;
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── PAGES ───────────────────────────────────────────── */
+.page {
+  width: 100%;
+  min-height: 100vh;
+  max-width: var(--page-w);
+  margin: 0 auto;
+  padding: 0 0 32px; /* ticker height */
+  position: relative;
+  overflow: hidden;
+}
+.page + .page {
+  border-top: 1px solid var(--rule2);
+}
+
+/* ── PAGE HEADER ─────────────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px 0;
+  position: relative;
+  z-index: 10;
+}
+@media (max-width: 700px) { .page-header { padding: 18px 22px 0; } }
+.ph-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--chrome);
+}
+.ph-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .18em;
+  color: var(--chrome2);
+}
+.ph-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  border: 1px solid rgba(202,255,0,.4);
+  color: var(--neon);
+  padding: 3px 10px;
+}
+
+/* ── SVG COURT BACKGROUND ────────────────────────────── */
+.court-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── PICKLEBALL TRAVEL PATH ──────────────────────────── */
+.ball-path {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── PAGE 1 LAYOUT ───────────────────────────────────── */
+#page1 { background: var(--black); }
+.p1-body {
+  position: relative;
+  z-index: 5;
+  padding: 40px 48px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .p1-body { grid-template-columns: 1fr; gap: 32px; padding: 28px 22px 36px; }
+}
+
+/* HERO TEXT */
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: .36em;
+  text-transform: uppercase;
+  color: var(--neon);
+  margin-bottom: 16px;
+}
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 9vw, 108px);
+  line-height: .88;
+  letter-spacing: .02em;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.hero-headline-sub {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4vw, 46px);
+  letter-spacing: .04em;
+  color: var(--chrome);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.hero-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--neon);
+  margin-bottom: 20px;
+}
+.hero-desc {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--chrome);
+  max-width: 440px;
+  margin-bottom: 36px;
+}
+.callout-box {
+  border-left: 2px solid var(--neon);
+  padding: 14px 20px;
+  background: rgba(202,255,0,.04);
+  display: inline-block;
+  margin-bottom: 32px;
+}
+.callout-box p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: .06em;
+  color: var(--off);
+  line-height: 1.6;
+}
+.callout-box strong {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--neon);
+}
+
+/* PRESENTERS */
+.presenters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.presenter-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.presenter-x {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  color: var(--chrome2);
+}
+
+/* RIGHT COLUMN — FRAMEWORK */
+.framework-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 8px;
+}
+.framework-header {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--chrome2);
+  margin-bottom: 14px;
+}
+
+/* PILLAR GRID */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+.pillar {
+  background: var(--charcoal);
+  border: 1px solid var(--rule);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--rule2);
+  transition: background .2s;
+}
+.pillar:hover::before { background: var(--neon); }
+.pillar-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: rgba(255,255,255,.06);
+  line-height: 1;
+}
+.pillar-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--off2);
+}
+.pillar.active { background: rgba(202,255,0,.07); border-color: rgba(202,255,0,.2); }
+.pillar.active .pillar-label { color: var(--neon); }
+
+/* ARROW DOWN */
+.arrow-down {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--chrome2);
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.arrow-down::before, .arrow-down::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* DESTINATION BOX */
+.destination {
+  background: var(--white);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.dest-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: .06em;
+  color: var(--black);
+  line-height: 1;
+}
+.dest-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-top: 2px;
+}
+.dest-ball {
+  width: 36px;
+  height: 36px;
+}
+
+/* 4-ELEMENT DIAGRAM */
+.quad-diagram {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.quad-cell {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 14px 14px 12px;
+}
+.qc-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--chrome2);
+  margin-bottom: 4px;
+}
+.qc-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: .06em;
+  color: var(--off);
+  line-height: 1;
+}
+.qc-desc {
+  font-size: 10px;
+  color: var(--chrome2);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ── PAGE 2 LAYOUT ───────────────────────────────────── */
+#page2 { background: var(--charcoal); }
+.p2-body {
+  position: relative;
+  z-index: 5;
+  padding: 36px 48px 48px;
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: 52px;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .p2-body { grid-template-columns: 1fr; gap: 32px; padding: 24px 22px 36px; }
+}
+
+/* TIMELINE */
+.timeline-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--neon);
+  margin-bottom: 24px;
+}
+.tl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 0;
+  position: relative;
+}
+.tl-spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.tl-node {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--neon);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.tl-node.hollow {
+  background: transparent;
+  border: 1px solid var(--neon);
+}
+.tl-line {
+  width: 1px;
+  flex: 1;
+  min-height: 24px;
+  background: rgba(202,255,0,.25);
+  margin: 4px 0;
+}
+.tl-body { padding-bottom: 24px; flex: 1; }
+.tl-day {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: .06em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.tl-day-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--neon);
+  margin-bottom: 10px;
+}
+.tl-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tl-list li {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: .08em;
+  color: var(--chrome);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tl-list li::before {
+  content: '';
+  width: 4px;
+  height: 1px;
+  background: var(--neon);
+  opacity: .5;
+  flex-shrink: 0;
+}
+
+/* TRANSITION BOX */
+.tl-transition {
+  background: var(--black);
+  border: 1px solid var(--rule2);
+  padding: 14px 18px;
+  margin: 0 0 0 28px;
+  margin-bottom: 24px;
+}
+.tl-tr-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--chrome2);
+  margin-bottom: 4px;
+}
+.tl-tr-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: .06em;
+  color: var(--neon);
+}
+.tl-tr-desc {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--chrome2);
+  margin-top: 3px;
+}
+
+/* RIGHT — ECOSYSTEM DIAGRAM */
+.eco-col { display: flex; flex-direction: column; gap: 20px; }
+.eco-header {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--chrome2);
+  margin-bottom: 4px;
+}
+.eco-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 4.5vw, 52px);
+  letter-spacing: .04em;
+  line-height: .92;
+  color: var(--white);
+}
+.eco-title span { color: var(--neon); }
+
+/* Radial ecosystem SVG area */
+.eco-diagram-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.85;
+  max-width: 500px;
+}
+.eco-svg { width: 100%; height: 100%; }
+
+/* EXPERIENCE GRID */
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.exp-cell {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 12px 10px;
+  position: relative;
+  overflow: hidden;
+}
+.exp-cell::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--rule);
+}
+.exp-cell:hover { background: rgba(202,255,0,.05); }
+.exp-c-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--chrome2);
+  margin-bottom: 3px;
+}
+.exp-c-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--off);
+  line-height: 1.2;
+}
+
+/* CLOSING STATEMENT */
+.closing {
+  background: var(--white);
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  margin: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+@media (max-width: 700px) { .closing { margin: 0 22px; flex-direction: column; text-align: center; } }
+.closing-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(18px, 3vw, 28px);
+  letter-spacing: .04em;
+  color: var(--black);
+  line-height: 1.1;
+}
+.closing-text span { color: var(--chrome2); }
+.closing-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--chrome2);
+  margin-top: 4px;
+}
+.closing-badge {
+  background: var(--black);
+  color: var(--neon);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.closing-neon-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--neon);
+}
+
+/* ── PAGE WRAPPER for closing ────────────────────────── */
+.p2-closing {
+  padding-bottom: 12px;
+}
+</style>
+</head>
+<body>
+
+<!-- ─── TICKER ─────────────────────────────────────────── -->
+<div class="ticker-rail">
+  <div class="ticker-flag">CULTURE COURT</div>
+  <div class="ticker-scroll-wrap">
+    <div class="ticker-scroll">
+      <span class="ticker-item">ATLANTA</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">NEWPORT BEACH</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">NEW YORK</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">CULTURE</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">COMMUNITY</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">COMPETITION</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">HOSPITALITY</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">JUSTE</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">DAVINCHI</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">TTC</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">FASHION</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">WELLNESS</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">ENTERTAINMENT</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">PICKLEBALL</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">CULTURE COURT</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">WHERE CULTURE MEETS COMPETITION</span><span class="ticker-dot">◆</span>
+      <!-- repeat for seamless loop -->
+      <span class="ticker-item">ATLANTA</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">NEWPORT BEACH</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">NEW YORK</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">CULTURE</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">COMMUNITY</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">COMPETITION</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">HOSPITALITY</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">JUSTE</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">DAVINCHI</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">TTC</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">FASHION</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">WELLNESS</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">ENTERTAINMENT</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">PICKLEBALL</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">CULTURE COURT</span><span class="ticker-dot">◆</span>
+      <span class="ticker-item">WHERE CULTURE MEETS COMPETITION</span><span class="ticker-dot">◆</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 1 — THE VISION
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page1">
+
+  <!-- Court geometry background -->
+  <svg class="court-bg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="glow1" cx="70%" cy="30%" r="50%">
+        <stop offset="0%" stop-color="#CAFF00" stop-opacity=".06"/>
+        <stop offset="100%" stop-color="#CAFF00" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="glow2" cx="20%" cy="80%" r="40%">
+        <stop offset="0%" stop-color="#CAFF00" stop-opacity=".03"/>
+        <stop offset="100%" stop-color="#CAFF00" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#glow1)"/>
+    <rect width="1200" height="800" fill="url(#glow2)"/>
+    <!-- Court outline right side -->
+    <g stroke="rgba(255,255,255,.04)" fill="none" stroke-width="1">
+      <rect x="640" y="80" width="480" height="640" rx="0"/>
+      <line x1="640" y1="400" x2="1120" y2="400"/>
+      <line x1="880" y1="80" x2="880" y2="400"/>
+      <line x1="880" y1="400" x2="880" y2="720"/>
+      <!-- Kitchen boxes -->
+      <rect x="640" y="80" width="130" height="320"/>
+      <rect x="990" y="80" width="130" height="320"/>
+      <rect x="640" y="400" width="130" height="320"/>
+      <rect x="990" y="400" width="130" height="320"/>
+      <!-- Center line -->
+      <line x1="880" y1="80" x2="880" y2="720" stroke-dasharray="8 8" stroke="rgba(255,255,255,.06)"/>
+    </g>
+    <!-- Stadium light rays -->
+    <g opacity=".025" stroke="rgba(255,255,255,1)" stroke-width="1" fill="none">
+      <line x1="1100" y1="0" x2="640" y2="400"/>
+      <line x1="1100" y1="0" x2="640" y2="200"/>
+      <line x1="1100" y1="0" x2="900" y2="720"/>
+      <line x1="1100" y1="0" x2="1120" y2="720"/>
+    </g>
+    <!-- Motion path of pickleball P1 -->
+    <path id="ballPath1" d="M 200 650 Q 400 100 680 380 Q 800 500 1100 200"
+          fill="none" stroke="rgba(202,255,0,.12)" stroke-width="1.5" stroke-dasharray="6 8"/>
+    <!-- Trajectory dots -->
+    <circle cx="200" cy="650" r="2" fill="#CAFF00" opacity=".3"/>
+    <circle cx="400" cy="180" r="1.5" fill="#CAFF00" opacity=".2"/>
+    <circle cx="680" cy="380" r="2" fill="#CAFF00" opacity=".25"/>
+    <circle cx="800" cy="480" r="1.5" fill="#CAFF00" opacity=".15"/>
+    <!-- Paddle silhouette suggestion -->
+    <g transform="translate(760, 520) rotate(-30)" opacity=".05" fill="rgba(255,255,255,1)">
+      <ellipse cx="0" cy="-40" rx="28" ry="36"/>
+      <rect x="-5" y="0" width="10" height="50" rx="3"/>
+    </g>
+  </svg>
+
+  <!-- Animated ball page 1 -->
+  <svg class="ball-path" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="ballGlow">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <circle r="11" fill="#CAFF00" filter="url(#ballGlow)" opacity=".9">
+      <animateMotion dur="6s" repeatCount="indefinite" keyTimes="0;0.3;0.7;1" calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1">
+        <mpath href="#ballPath1"/>
+      </animateMotion>
+    </circle>
+    <!-- Hole pattern on ball -->
+    <g opacity=".0" fill="#CAFF00">
+      <animateMotion dur="6s" repeatCount="indefinite">
+        <mpath href="#ballPath1"/>
+      </animateMotion>
+    </g>
+  </svg>
+
+  <div class="page-header">
+    <div class="ph-logo">DaVinchi × TTC</div>
+    <div class="ph-tag">The Vision</div>
+    <div class="ph-num">01</div>
+  </div>
+
+  <div class="p1-body">
+    <!-- LEFT: Hero -->
+    <div>
+      <div class="hero-eyebrow">Presented by DaVinchi × TTC</div>
+      <div class="hero-headline">THE<br>CULTURE<br>COURT</div>
+      <div class="hero-headline-sub">Where Culture Meets Competition.</div>
+      <div class="hero-rule"></div>
+      <div class="hero-desc">
+        A premium pickleball entertainment platform merging culture, fashion, music, wellness, hospitality, and competition into a single living property.
+      </div>
+      <div class="callout-box">
+        <p><strong>Not a tournament.</strong><br>A new entertainment property.</p>
+      </div>
+      <div class="presenters">
+        <div class="presenter-name">DaVinchi</div>
+        <div class="presenter-x">×</div>
+        <div class="presenter-name">TTC</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Framework -->
+    <div>
+      <div class="framework-header">The Framework</div>
+      <div class="pillar-grid">
+        <div class="pillar active">
+          <div class="pillar-n">01</div>
+          <div class="pillar-label">Pickleball</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n">02</div>
+          <div class="pillar-label">Culture</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n">03</div>
+          <div class="pillar-label">Community</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n">04</div>
+          <div class="pillar-label">Entertainment</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n">05</div>
+          <div class="pillar-label">Fashion</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n">06</div>
+          <div class="pillar-label">Hospitality</div>
+        </div>
+      </div>
+
+      <div class="arrow-down">
+        <svg width="12" height="16" viewBox="0 0 12 16" fill="none" style="margin:0 4px;">
+          <path d="M6 0V12M6 12L1 7M6 12L11 7" stroke="#CAFF00" stroke-width="1" opacity=".5"/>
+        </svg>
+      </div>
+
+      <div class="destination">
+        <div>
+          <div class="dest-title">THE CULTURE COURT</div>
+          <div class="dest-sub">Premium Sports Entertainment Property</div>
+        </div>
+        <!-- Pickleball SVG -->
+        <svg class="dest-ball" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" fill="#CAFF00"/>
+          <circle cx="14" cy="14" r="2" fill="rgba(0,0,0,.25)"/>
+          <circle cx="26" cy="14" r="2" fill="rgba(0,0,0,.25)"/>
+          <circle cx="20" cy="22" r="2" fill="rgba(0,0,0,.25)"/>
+          <circle cx="14" cy="28" r="2" fill="rgba(0,0,0,.25)"/>
+          <circle cx="26" cy="28" r="2" fill="rgba(0,0,0,.25)"/>
+          <circle cx="8" cy="21" r="1.5" fill="rgba(0,0,0,.2)"/>
+          <circle cx="32" cy="21" r="1.5" fill="rgba(0,0,0,.2)"/>
+        </svg>
+      </div>
+
+      <div style="margin-bottom:14px;">
+        <div class="framework-header" style="margin-bottom:10px;">The Energy</div>
+        <div class="quad-diagram">
+          <div class="quad-cell">
+            <div class="qc-label">Energy</div>
+            <div class="qc-title">US Open<br>Intensity</div>
+            <div class="qc-desc">Grand slam atmosphere. Premium production.</div>
+          </div>
+          <div class="quad-cell" style="background:rgba(202,255,0,.06);border-color:rgba(202,255,0,.15);">
+            <div class="qc-label" style="color:#CAFF00;">Moments</div>
+            <div class="qc-title" style="color:#CAFF00;">Celebrity<br>All-Star</div>
+            <div class="qc-desc">A-list captains. Cultural gravity on the court.</div>
+          </div>
+          <div class="quad-cell">
+            <div class="qc-label">Aesthetic</div>
+            <div class="qc-title">Fashion<br>Week</div>
+            <div class="qc-desc">Court as runway. JUSTE. Style as statement.</div>
+          </div>
+          <div class="quad-cell">
+            <div class="qc-label">Mission</div>
+            <div class="qc-title">Community<br>Impact</div>
+            <div class="qc-desc">Mental health. Access. Belonging for all.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 2 — THE EXPERIENCE
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page2">
+
+  <!-- Court geometry p2 -->
+  <svg class="court-bg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="glow3" cx="30%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#CAFF00" stop-opacity=".05"/>
+        <stop offset="100%" stop-color="#CAFF00" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="url(#glow3)"/>
+    <!-- Court left side — mirrored -->
+    <g stroke="rgba(255,255,255,.05)" fill="none" stroke-width="1">
+      <rect x="80" y="80" width="480" height="640" rx="0"/>
+      <line x1="80" y1="400" x2="560" y2="400"/>
+      <line x1="320" y1="80" x2="320" y2="720"/>
+      <!-- Kitchen -->
+      <rect x="80" y="80" width="130" height="320"/>
+      <rect x="430" y="80" width="130" height="320"/>
+      <rect x="80" y="400" width="130" height="320"/>
+      <rect x="430" y="400" width="130" height="320"/>
+    </g>
+    <!-- Ball continues from page 1 — picks up right edge -->
+    <path id="ballPath2" d="M 1100 200 Q 900 600 700 350 Q 500 180 200 500"
+          fill="none" stroke="rgba(202,255,0,.1)" stroke-width="1.5" stroke-dasharray="6 8"/>
+    <circle cx="1100" cy="200" r="2" fill="#CAFF00" opacity=".2"/>
+    <circle cx="700" cy="350" r="2" fill="#CAFF00" opacity=".2"/>
+    <circle cx="200" cy="500" r="2" fill="#CAFF00" opacity=".15"/>
+    <!-- Paddle suggestion p2 -->
+    <g transform="translate(460, 280) rotate(15)" opacity=".05" fill="rgba(255,255,255,1)">
+      <ellipse cx="0" cy="-40" rx="28" ry="36"/>
+      <rect x="-5" y="0" width="10" height="50" rx="3"/>
+    </g>
+  </svg>
+
+  <!-- Animated ball page 2 — continues journey -->
+  <svg class="ball-path" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="ballGlow2">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <circle r="11" fill="#CAFF00" filter="url(#ballGlow2)" opacity=".85">
+      <animateMotion dur="7s" repeatCount="indefinite" keyTimes="0;0.4;0.7;1" calcMode="spline"
+        keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1">
+        <mpath href="#ballPath2"/>
+      </animateMotion>
+    </circle>
+  </svg>
+
+  <div class="page-header">
+    <div class="ph-logo">The Culture Court</div>
+    <div class="ph-tag">The Experience</div>
+    <div class="ph-num">02</div>
+  </div>
+
+  <div class="p2-body">
+    <!-- LEFT: Timeline -->
+    <div>
+      <div class="timeline-label">Event Structure</div>
+
+      <!-- DAY 1 -->
+      <div class="tl-item">
+        <div class="tl-spine">
+          <div class="tl-node"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-day">DAY 01</div>
+          <div class="tl-day-sub">Community Day</div>
+          <ul class="tl-list">
+            <li>Pickleball clinic — open access</li>
+            <li>Wellness conversations &amp; mental health</li>
+            <li>Community engagement &amp; open play</li>
+            <li>Captain scouting — talent identification</li>
+            <li>Content capture throughout</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TRANSITION -->
+      <div class="tl-transition">
+        <div class="tl-tr-label">Transition</div>
+        <div class="tl-tr-title">THE DRAFT</div>
+        <div class="tl-tr-desc">Celebrity captains select community players. Culture meets competition.</div>
+      </div>
+
+      <!-- DAY 2 -->
+      <div class="tl-item">
+        <div class="tl-spine">
+          <div class="tl-node hollow"></div>
+        </div>
+        <div class="tl-body" style="padding-bottom:0;">
+          <div class="tl-day">DAY 02</div>
+          <div class="tl-day-sub">The Culture Court</div>
+          <ul class="tl-list">
+            <li>4 teams — celebrity captains lead</li>
+            <li>Pro athletes + community players</li>
+            <li>Live DJ &amp; MC — premium production</li>
+            <li>Hospitality &amp; VIP experiences</li>
+            <li>Fashion moments — JUSTE activations</li>
+            <li>Premium competition format</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Ecosystem diagram -->
+    <div class="eco-col">
+      <div>
+        <div class="eco-header">The Ecosystem</div>
+        <div class="eco-title">One Platform.<br><span>Every Layer.</span></div>
+      </div>
+
+      <!-- SVG Ecosystem Diagram -->
+      <div class="eco-diagram-wrap">
+        <svg class="eco-svg" viewBox="0 0 480 360" fill="none" aria-label="Ecosystem diagram showing Da'Vinchi, Sean/TTC, Celebrity Captains, Community Players, and Fans converging into The Culture Court">
+          <defs>
+            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#CAFF00" stop-opacity=".15"/>
+              <stop offset="100%" stop-color="#CAFF00" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="nodeGlow">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Center glow -->
+          <circle cx="240" cy="180" r="100" fill="url(#centerGlow)"/>
+
+          <!-- Connection lines — spokes -->
+          <line x1="240" y1="180" x2="90" y2="60"  stroke="rgba(202,255,0,.2)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="240" y1="180" x2="390" y2="60"  stroke="rgba(202,255,0,.2)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="240" y1="180" x2="60"  y2="220" stroke="rgba(202,255,0,.2)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="240" y1="180" x2="420" y2="220" stroke="rgba(202,255,0,.2)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="240" y1="180" x2="240" y2="320" stroke="rgba(202,255,0,.2)" stroke-width="1" stroke-dasharray="4 4"/>
+
+          <!-- Center — Culture Court -->
+          <circle cx="240" cy="180" r="54" fill="#111114" stroke="#CAFF00" stroke-width="1.5"/>
+          <!-- Pickleball in center -->
+          <circle cx="240" cy="175" r="22" fill="#CAFF00"/>
+          <circle cx="233" cy="168" r="2.5" fill="rgba(0,0,0,.3)"/>
+          <circle cx="247" cy="168" r="2.5" fill="rgba(0,0,0,.3)"/>
+          <circle cx="240" cy="178" r="2.5" fill="rgba(0,0,0,.3)"/>
+          <circle cx="233" cy="185" r="2" fill="rgba(0,0,0,.25)"/>
+          <circle cx="247" cy="185" r="2" fill="rgba(0,0,0,.25)"/>
+          <text x="240" y="210" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="9" fill="rgba(255,255,255,.6)" letter-spacing="2">CULTURE COURT</text>
+
+          <!-- Node: DaVinchi top-left -->
+          <circle cx="90" cy="60" r="32" fill="#111114" stroke="rgba(202,255,0,.4)" stroke-width="1"/>
+          <text x="90" y="55" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="10" fill="#CAFF00" letter-spacing="1">DA'VINCHI</text>
+          <text x="90" y="67" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="7" fill="rgba(255,255,255,.4)" letter-spacing="1">FOUNDER</text>
+
+          <!-- Node: Sean/TTC top-right -->
+          <circle cx="390" cy="60" r="32" fill="#111114" stroke="rgba(202,255,0,.4)" stroke-width="1"/>
+          <text x="390" y="55" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="10" fill="#CAFF00" letter-spacing="1">SEAN</text>
+          <text x="390" y="67" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="7" fill="rgba(255,255,255,.4)" letter-spacing="1">TTC</text>
+
+          <!-- Node: Celebrity Captains left -->
+          <circle cx="60" cy="220" r="32" fill="#181820" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+          <text x="60" y="215" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="9" fill="rgba(255,255,255,.8)" letter-spacing="1">CELEBRITY</text>
+          <text x="60" y="226" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="7" fill="rgba(255,255,255,.4)" letter-spacing="1">CAPTAINS</text>
+
+          <!-- Node: Community Players right -->
+          <circle cx="420" cy="220" r="32" fill="#181820" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+          <text x="420" y="215" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="9" fill="rgba(255,255,255,.8)" letter-spacing="1">COMMUNITY</text>
+          <text x="420" y="226" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="7" fill="rgba(255,255,255,.4)" letter-spacing="1">PLAYERS</text>
+
+          <!-- Node: Fans bottom -->
+          <circle cx="240" cy="320" r="28" fill="#181820" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+          <text x="240" y="324" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="11" fill="rgba(255,255,255,.7)" letter-spacing="1">FANS</text>
+
+          <!-- Moving ball on diagram -->
+          <circle r="5" fill="#CAFF00" opacity=".8">
+            <animateMotion dur="4s" repeatCount="indefinite">
+              <mpath>
+                <animate attributeName="d" dur="4s" repeatCount="indefinite"
+                  values="M90,60 Q180,120 240,180; M390,60 Q310,120 240,180; M60,220 Q150,200 240,180; M420,220 Q330,200 240,180; M240,320 Q240,250 240,180; M90,60 Q180,120 240,180"
+                  calcMode="discrete"/>
+              </mpath>
+            </animateMotion>
+          </circle>
+          <!-- Simpler: orbiting dot -->
+          <circle r="4" fill="#CAFF00" opacity=".7">
+            <animateTransform attributeName="transform" type="rotate"
+              from="0 240 180" to="360 240 180" dur="5s" repeatCount="indefinite"/>
+            <animate attributeName="cx" values="294" dur="5s" repeatCount="indefinite"/>
+            <animate attributeName="cy" values="180" dur="5s" repeatCount="indefinite"/>
+          </circle>
+
+        </svg>
+      </div>
+
+      <!-- Experience grid -->
+      <div>
+        <div class="eco-header" style="margin-bottom:8px;">Experience Layers</div>
+        <div class="exp-grid">
+          <div class="exp-cell">
+            <div class="exp-c-label">Court</div>
+            <div class="exp-c-title">Premium Competition</div>
+          </div>
+          <div class="exp-cell">
+            <div class="exp-c-label">Culture</div>
+            <div class="exp-c-title">Live DJ &amp; MC</div>
+          </div>
+          <div class="exp-cell">
+            <div class="exp-c-label">Fashion</div>
+            <div class="exp-c-title">JUSTE Moments</div>
+          </div>
+          <div class="exp-cell" style="background:rgba(202,255,0,.06);border-color:rgba(202,255,0,.15);">
+            <div class="exp-c-label" style="color:rgba(202,255,0,.6);">VIP</div>
+            <div class="exp-c-title" style="color:#CAFF00;">Hospitality</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING STATEMENT full width -->
+  <div class="p2-closing">
+    <div class="closing">
+      <div class="closing-neon-bar"></div>
+      <div>
+        <div class="closing-text">
+          This is not just an event.<br>
+          <span>This is the foundation of a new sports entertainment platform.</span>
+        </div>
+        <div class="closing-sub">The Culture Court &nbsp;·&nbsp; DaVinchi × TTC &nbsp;·&nbsp; Est. 2026</div>
+      </div>
+      <div class="closing-badge">The Culture Court</div>
+    </div>
+    <!-- Copyright -->
+    <div style="text-align:center;padding:14px 48px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.2);">&copy; 2026 Craigmor Inc &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; Confidential</span>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.2);">DaVinchi × TTC &nbsp;·&nbsp; Where Culture Meets Competition</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
